@@ -18,12 +18,17 @@ enum DestinationSearchOtions {
 struct DestinationSearchView: View {
     
     @Binding var show: Bool
-    @State private var destination = ""
+    @State private var minPrice = ""
+    @State private var maxPrice = ""
+    @State private var minYear = ""
+    @State private var maxYear = ""
+    @State private var minKm = ""
+    @State private var maxKm = ""
     @State private var selectedOptions: DestinationSearchOtions = .price
     @State private var isAutomatic = false
     @State private var isManual = false
     @State private var isDiesel = false
-    @State private var isGasolene = false
+    @State private var isGasoline = false
     @State private var isElectric = false
     @State private var isHybrit = false
     
@@ -40,9 +45,9 @@ struct DestinationSearchView: View {
                         .imageScale(.large)
                 }
                 Spacer()
-                if !destination.isEmpty {
+                if !minPrice.isEmpty {
                     Button("Temizle") {
-                        destination = ""
+                        minPrice = ""
                     }
                     .font(.callout)
                     .fontWeight(.semibold)
@@ -55,7 +60,7 @@ struct DestinationSearchView: View {
                     Text("Fiyat")
                         .fontWeight(.semibold)
                     HStack {
-                        TextField("Min fiyat", text: $destination)
+                        TextField("Min fiyat", text: $minPrice)
                             .frame(height: 40)
                             .padding(.horizontal)
                             .overlay {
@@ -63,7 +68,7 @@ struct DestinationSearchView: View {
                                     .stroke(lineWidth: 1.0)
                                     .foregroundStyle(Color(.systemGray2))
                             }
-                        TextField("Max fiyat", text: $destination)
+                        TextField("Max fiyat", text: $maxPrice)
                             .frame(height: 40)
                             .padding(.horizontal)
                             .overlay {
@@ -87,7 +92,7 @@ struct DestinationSearchView: View {
                     Text("Yıl")
                         .fontWeight(.semibold)
                     HStack {
-                        TextField("Min yıl", text: $destination)
+                        TextField("Min yıl", text: $minYear)
                             .frame(height: 40)
                             .padding(.horizontal)
                             .overlay {
@@ -95,7 +100,7 @@ struct DestinationSearchView: View {
                                     .stroke(lineWidth: 1.0)
                                     .foregroundStyle(Color(.systemGray2))
                             }
-                        TextField("Max yıl", text: $destination)
+                        TextField("Max yıl", text: $maxYear)
                             .frame(height: 40)
                             .padding(.horizontal)
                             .overlay {
@@ -119,7 +124,7 @@ struct DestinationSearchView: View {
                     Text("Km")
                         .fontWeight(.semibold)
                     HStack {
-                        TextField("Min km", text: $destination)
+                        TextField("Min km", text: $minKm)
                             .frame(height: 40)
                             .padding(.horizontal)
                             .overlay {
@@ -127,7 +132,7 @@ struct DestinationSearchView: View {
                                     .stroke(lineWidth: 1.0)
                                     .foregroundStyle(Color(.systemGray2))
                             }
-                        TextField("Max km", text: $destination)
+                        TextField("Max km", text: $maxKm)
                             .frame(height: 40)
                             .padding(.horizontal)
                             .overlay {
@@ -184,7 +189,7 @@ struct DestinationSearchView: View {
                     .toggleStyle(CheckboxToggleStyle())
                     .padding()
 
-                    Toggle(isOn: $isGasolene) {
+                    Toggle(isOn: $isGasoline) {
                         Text("Benzin")
                     }
                     .toggleStyle(CheckboxToggleStyle())

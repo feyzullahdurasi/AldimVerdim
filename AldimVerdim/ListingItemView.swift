@@ -8,31 +8,47 @@
 import SwiftUI
 
 struct ListingItemView: View {
+    
+    let listing: Listing
+    
     var body: some View {
         HStack{
             //image
-            Rectangle()
+            Image(listing.mainImageURL)
+                .resizable()
                 .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
             // details
             HStack (alignment: .top){
                 VStack{
-                    Text("bmw 5 series")
+                    Text(listing.productName)
                         .fontWeight(.semibold)
-                    Text("150.000 km")
-                    Text("Otomatic")
+                    Text(listing.km)
+                    if listing.automatic {
+                        Text("Otomatik")
+                    } else {
+                        Text("Manuel")
+                    }
+                    
                     
                 }
                 Spacer()
-                HStack{
-                    Image(systemName: "star.fill")
-                    Text("4.1")
+                VStack(spacing: 35) {
+                    HStack{
+                        Image(systemName: "star.fill")
+                        Text("\(listing.rating)")
+                        
+                    }
+                    
+                    Text("\(listing.price) ₺")
+                        .foregroundColor(.init(red: 0.1, green: 0.3, blue: 1.5))
                 }
             }
         }
         .foregroundColor(.black)
+        
     }
 }
 
 #Preview {
-    ListingItemView()
+    ListingItemView(listing: DeveloperPreview.shared.listings[0])
 }
