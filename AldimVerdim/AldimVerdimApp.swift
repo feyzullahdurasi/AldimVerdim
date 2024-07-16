@@ -11,7 +11,7 @@ import SwiftUI
 struct AldimVerdimApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ExploreView()
         }
     }
 }
