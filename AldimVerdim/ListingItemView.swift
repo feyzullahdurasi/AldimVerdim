@@ -16,13 +16,13 @@ struct ListingItemView: View {
             //image
             Image(listing.mainImageURL)
                 .resizable()
-                .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                .frame(width: 100, height: 100)
             // details
             HStack (alignment: .top){
                 VStack{
                     Text(listing.productName)
                         .fontWeight(.semibold)
-                    Text(listing.km)
+                    Text("\(listing.km)")
                     if listing.automatic {
                         Text("Otomatik")
                     } else {
@@ -35,12 +35,12 @@ struct ListingItemView: View {
                 VStack(spacing: 35) {
                     HStack{
                         Image(systemName: "star.fill")
-                        Text("\(listing.rating)")
-                        
+                            .foregroundColor(.yellow)
+                        Text("\(String(format: "%.1f", listing.rating))")
                     }
-                    
                     Text("\(listing.price) ₺")
                         .foregroundColor(.init(red: 0.1, green: 0.3, blue: 1.5))
+                        
                 }
             }
         }

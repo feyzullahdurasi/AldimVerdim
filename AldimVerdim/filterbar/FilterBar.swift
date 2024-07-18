@@ -10,12 +10,15 @@ import SwiftUI
 struct FilterBar: View {
     
     @State private var showDestinationSearchView = false
+    @State private var showDestinationSortView = false
     
     var body: some View {
         NavigationStack{
             if(showDestinationSearchView) {
                 DestinationSearchView(show: $showDestinationSearchView)
-            } else {
+            } else if showDestinationSortView {
+                DestinationSortView(show: $showDestinationSortView, viewModel: ExploreViewModel(service: ExploreService()))
+            }else {
                 HStack {
                     
                     HStack {
@@ -38,10 +41,7 @@ struct FilterBar: View {
                     }
                     
                     HStack {
-                        
-                        
                         Text("Sırala")
-                        
                     }
                     .frame(width: UIScreen.main.bounds.width / 5, height: 50)
                     .overlay{
@@ -49,6 +49,11 @@ struct FilterBar: View {
                             .stroke(lineWidth: 1)
                             .foregroundColor(Color(.systemGray2))
                             .shadow(color: .black.opacity(0.5), radius: 2)
+                    }
+                    .onTapGesture {
+                        withAnimation(.snappy) {
+                            showDestinationSortView.toggle()
+                        }
                     }
                     
                     HStack {

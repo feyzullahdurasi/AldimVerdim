@@ -10,14 +10,16 @@ import Foundation
 struct Listing: Identifiable, Codable, Hashable {
     let id: String
     let ownerId: String
+    let userName: String
+    let userPass: String
     let ownerName: String
     let productName: String
     var mainImageURL: String
     let callNumber: String
     var imageURLs: [String]
-    let price: String
-    let year: String
-    let km: String
+    let price: Int
+    let year: Int
+    let km: Int
     let automatic: Bool
     let manual: Bool
     let diesel: Bool

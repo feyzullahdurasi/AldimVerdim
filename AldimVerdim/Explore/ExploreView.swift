@@ -12,14 +12,17 @@ struct ExploreView: View {
     
     @StateObject var viewModel = ExploreViewModel(service: ExploreService())
     let listing: Listing
+    @State private var isDetailView = false
     
     var body: some View {
-        NavigationStack{
-            FilterBar()
+        
+            VStack {
+                if !isDetailView {
+                    FilterBar()
+                        .frame(height: 55)
+                }
+                NavigationStack{
                 ScrollView{
-                    
-                        
-                    
                     LazyVStack{
                         ForEach(viewModel.listings) { listing in
                             NavigationLink(value: listing) {
@@ -35,10 +38,17 @@ struct ExploreView: View {
                 .navigationDestination(for: Listing.self) { listing in
                     ListingDetailView(listing: listing)
                         .navigationBarBackButtonHidden()
+                        .onAppear {
+                            isDetailView = true
+                        }
+                        .onDisappear {
+                            isDetailView = false
+                        }
                 }
             }
         }
     }
+}
 
 
 #Preview {

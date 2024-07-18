@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @StateObject var viewModel = ExploreViewModel(service: ExploreService())
     let listing: Listing
     var body: some View {
         TabView {
@@ -20,9 +21,14 @@ struct MainTabView: View {
             ProfileView()
                 .tabItem { Label("Profil", systemImage: "person") }
         }
+        .navigationDestination(for: Listing.self) { listing in
+            ListingDetailView(listing: listing)
+                .navigationBarBackButtonHidden()
+        }
     }
 }
 
 #Preview {
     MainTabView(listing: DeveloperPreview.shared.listings[0])
 }
+

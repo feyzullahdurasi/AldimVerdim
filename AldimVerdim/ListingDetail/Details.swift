@@ -11,10 +11,19 @@ struct Details: View {
     let listing: Listing
     var body: some View {
         VStack(alignment: .leading) {
-            infoRow(title: "Fiyat", value: "\(listing.price)₺")
+            VStack {
+                HStack {
+                    Text("Fiyat")
+                    Spacer()
+                    Text("\(listing.price)₺")
+                        .bold()
+                }
+                .padding(.horizontal)
+                Divider()
+            }
             infoRow(title: "İlan No", value: listing.id)
             infoRow(title: "Model", value: listing.productName)
-            infoRow(title: "Yıl", value: listing.year)
+            infoRow(title: "Yıl", value: "\(listing.year)")
             if listing.diesel {
                 infoRow(title: "Yakıt", value: "Dizel")
             } else if listing.gasoline {
@@ -24,7 +33,15 @@ struct Details: View {
             } else {
                 infoRow(title: "Yakıt", value: "Hibrit")
             }
-            infoRow(title: "KM", value: listing.km)
+            VStack {
+                HStack {
+                    Text("KM")
+                    Spacer()
+                    Text("\(listing.km)")
+                }
+                .padding(.horizontal)
+                Divider()
+            }
             if listing.automatic {
                 infoRow(title: "Vites", value: "Otomatik")
             } else {

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum DestinationSearchOtions {
+enum DestinationSearchOptions {
     case price
     case km
     case year
@@ -24,15 +24,14 @@ struct DestinationSearchView: View {
     @State private var maxYear = ""
     @State private var minKm = ""
     @State private var maxKm = ""
-    @State private var selectedOptions: DestinationSearchOtions = .price
     @State private var isAutomatic = false
     @State private var isManual = false
     @State private var isDiesel = false
     @State private var isGasoline = false
     @State private var isElectric = false
     @State private var isHybrit = false
+    @State private var selectedOptions: DestinationSearchOptions = .price
     
-
     var body: some View {
         VStack {
             HStack {
@@ -220,7 +219,15 @@ struct DestinationSearchView: View {
             
             Spacer()
             
-            
+            Button("Filtrele") {
+                show.toggle()
+            }
+            .frame(width: 150, height: 50)
+            .foregroundColor(.white)
+            .fontWeight(.bold)
+            .background(.blue)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .padding()
         }
     }
 }
@@ -258,10 +265,7 @@ struct ExtractedView: View {
                 Text(description)
                     .fontWeight(.semibold)
             }
-            
         }
-        
-        
     }
 }
 
