@@ -48,6 +48,7 @@ struct ProfileView: View {
                     .font(.caption)
                 }
             }
+            .navigationBarBackButtonHidden(true)
             .padding(.bottom, 150)
         }
         

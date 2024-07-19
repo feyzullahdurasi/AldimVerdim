@@ -26,6 +26,7 @@ struct Listing: Identifiable, Codable, Hashable {
     let gasoline: Bool
     let electric: Bool
     let hybrit: Bool
+    let favorite: Bool
     let address: String
     let city: String
     let state: String

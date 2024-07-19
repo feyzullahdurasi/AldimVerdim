@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @StateObject var viewModel = ExploreViewModel(service: ExploreService())
+    //@StateObject var viewModel = ExploreViewModel(service: ExploreService())
     let listing: Listing
     var body: some View {
         TabView {
             ExploreView( listing: listing)
                 .tabItem { Label("Keşfet", systemImage: "magnifyingglass") }
             
-            WishlistView()
+            WishlistView( listing: listing)
                 .tabItem { Label("Favoriler", systemImage: "heart") }
             
-            ProfileView()
+            MainProfileView(listing: listing)
                 .tabItem { Label("Profil", systemImage: "person") }
         }
         .navigationDestination(for: Listing.self) { listing in

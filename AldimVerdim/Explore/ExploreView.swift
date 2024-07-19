@@ -19,7 +19,9 @@ struct ExploreView: View {
             VStack {
                 if !isDetailView {
                     FilterBar()
-                        .frame(height: 55)
+                        .frame(height: 54)
+                        .transition(.move(edge: .top))
+                        .animation(.easeInOut, value: !isDetailView)
                 }
                 NavigationStack{
                 ScrollView{

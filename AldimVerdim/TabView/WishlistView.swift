@@ -8,14 +8,37 @@
 import SwiftUI
 
 struct WishlistView: View {
+    
+    @StateObject var viewModel = ExploreViewModel(service: ExploreService())
+    let listing: Listing
+    
     var body: some View {
         VStack {
-            Text("deneme")
+            NavigationStack{
+                ScrollView{
+                    LazyVStack{
+                        ForEach(viewModel.listings.filter { $0.favorite }) { listing in
+                            NavigationLink(value: listing) {
+                                ListingItemView(listing: listing)
+                                    .frame(height: 100)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                            }
+                        }
+                    }
+                    .padding()
+                    
+                }
+                .navigationDestination(for: Listing.self) { listing in
+                    ListingDetailView(listing: listing)
+                        .navigationBarBackButtonHidden()
+                        
+                }
+            }
         }
-        .navigationTitle("Wishlists")
+        .navigationTitle("Favoriler")
     }
 }
 
 #Preview {
-    WishlistView()
+    WishlistView( listing: DeveloperPreview.shared.listings[0])
 }

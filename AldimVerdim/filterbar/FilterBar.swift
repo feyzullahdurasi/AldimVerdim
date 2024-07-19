@@ -11,6 +11,8 @@ struct FilterBar: View {
     
     @State private var showDestinationSearchView = false
     @State private var showDestinationSortView = false
+    @State private var showSearchView = false
+    @State private var isHeartFilled = false
     
     var body: some View {
         NavigationStack{
@@ -69,12 +71,19 @@ struct FilterBar: View {
                             .foregroundColor(Color(.systemGray2))
                             .shadow(color: .black.opacity(0.5), radius: 2)
                     }
+                    .onTapGesture {
+                        withAnimation(.snappy) {
+                            showSearchView.toggle()
+                        }
+                    }
                     
                     HStack {
                         
-                        Image(systemName: "heart")
-                        
-                        
+                        Image(systemName: isHeartFilled ? "heart.fill" : "heart")
+                            .foregroundColor(isHeartFilled ? .red : .black)
+                            .onTapGesture {
+                                isHeartFilled.toggle()
+                            }
                     }
                     .frame(width: UIScreen.main.bounds.width / 9, height: 50)
                     .overlay{
@@ -83,6 +92,7 @@ struct FilterBar: View {
                             .foregroundColor(Color(.systemGray2))
                             .shadow(color: .black.opacity(0.5), radius: 2)
                     }
+                    
                     HStack {
                         Image(systemName: "person.and.person")
                         

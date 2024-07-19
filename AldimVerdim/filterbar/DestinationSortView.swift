@@ -99,3 +99,4 @@ struct CollapsibleDestinationViewModifier2: ViewModifier {
         
     }
 }
+

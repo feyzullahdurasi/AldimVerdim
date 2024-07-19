@@ -10,8 +10,9 @@ import SwiftUI
 struct ListingDetailView: View {
     
     @Environment(\.dismiss) var dismiss
-    @State private var selectedTab: String? = nil
+    @State private var selectedTab: String? = "Detay"
     let listing: Listing
+    
     
     var body: some View {
         ScrollView {
@@ -23,9 +24,11 @@ struct ListingDetailView: View {
                         .foregroundColor(.black)
                         
                 }
+                Spacer()
                 Text(listing.title)
                     .multilineTextAlignment(.center)
                     
+                Spacer()
                 Button {
                     
                 } label: {
