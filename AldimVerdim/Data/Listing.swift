@@ -26,11 +26,12 @@ struct Listing: Identifiable, Codable, Hashable {
     let gasoline: Bool
     let electric: Bool
     let hybrit: Bool
-    let favorite: Bool
+    var favorite: Bool
     let address: String
     let city: String
     let state: String
     let title: String
+    let comment: String
     var rating: Double
     var features: [ListingFeatures]
     var type: ListingType

@@ -39,7 +39,7 @@ struct ListingItemView: View {
                         Text("\(String(format: "%.1f", listing.rating))")
                     }
                     Text("\(listing.price) ₺")
-                        .foregroundColor(.init(red: 0.1, green: 0.3, blue: 1.5))
+                        .foregroundColor(.init(red: 0.1, green: 0.3, blue: 0.3))
                         
                 }
             }

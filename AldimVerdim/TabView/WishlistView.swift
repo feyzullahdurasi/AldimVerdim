@@ -16,6 +16,9 @@ struct WishlistView: View {
         VStack {
             NavigationStack{
                 ScrollView{
+                    Text("Wishlist")
+                        .padding(.top)
+                        .font(.title)
                     LazyVStack{
                         ForEach(viewModel.listings.filter { $0.favorite }) { listing in
                             NavigationLink(value: listing) {
@@ -26,16 +29,13 @@ struct WishlistView: View {
                         }
                     }
                     .padding()
-                    
                 }
                 .navigationDestination(for: Listing.self) { listing in
                     ListingDetailView(listing: listing)
                         .navigationBarBackButtonHidden()
-                        
                 }
             }
         }
-        .navigationTitle("Favoriler")
     }
 }
 

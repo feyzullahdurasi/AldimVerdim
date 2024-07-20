@@ -13,6 +13,7 @@ class ExploreViewModel: ObservableObject {
     @Published var listings = [Listing]()
     private let service: ExploreService
     @Published var filteredListings: [Listing] = []
+    @Published var searchWord = ""
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -20,12 +21,22 @@ class ExploreViewModel: ObservableObject {
         self.service = service
         
         Task { await fetchListings() }
+        
+        $searchWord
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .sink(receiveValue: { [weak self] newSearchWord in
+                self?.applySearchFilter(searchWord: newSearchWord)
+            })
+            .store(in: &cancellables)
     }
     
     func fetchListings() async {
         do {
+            
             self.listings = try await service.fetchListings()
             self.filteredListings = listings
+            
+            
         } catch {
             print("error: \(error.localizedDescription)")
         }
@@ -42,23 +53,33 @@ class ExploreViewModel: ObservableObject {
     }
     
     func sortListings(by option: SortOption) {
-            switch option {
-            case .random:
-                filteredListings.shuffle()
-            case .priceAscending:
-                filteredListings.sort { (Int($0.price)) < (Int($1.price)) }
-            case .priceDescending:
-                filteredListings.sort { (Int($0.price)) > (Int($1.price)) }
-            case .yearAscending:
-                filteredListings.sort { Int($0.year) < Int($1.year) }
-            case .yearDescending:
-                filteredListings.sort { Int($0.year) > Int($1.year) }
-            case .kmAscending:
-                filteredListings.sort { Int($0.km) < Int($1.km) }
-            case .kmDescending:
-                filteredListings.sort { Int($0.km) > Int($1.km) }
+        switch option {
+        case .random:
+            filteredListings.shuffle()
+        case .priceAscending:
+            filteredListings.sort { ($0.price) < ($1.price) }
+        case .priceDescending:
+            filteredListings.sort { (Int($0.price)) > (Int($1.price)) }
+        case .yearAscending:
+            filteredListings.sort { Int($0.year) < Int($1.year) }
+        case .yearDescending:
+            filteredListings.sort { Int($0.year) > Int($1.year) }
+        case .kmAscending:
+            filteredListings.sort { Int($0.km) < Int($1.km) }
+        case .kmDescending:
+            filteredListings.sort { Int($0.km) > Int($1.km) }
+        }
+    }
+    
+    private func applySearchFilter(searchWord: String) {
+        if searchWord.isEmpty {
+            
+            filteredListings = listings
+        } else {
+            filteredListings = listings.filter { listing in
+                listing.productName.localizedCaseInsensitiveContains(searchWord)
             }
-        
+        }
     }
 }
     

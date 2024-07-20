@@ -57,9 +57,10 @@ struct DestinationSortView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .padding()
             }
+            .frame(height: 700)
+            
         }
     }
-        
 }
 
 #Preview {

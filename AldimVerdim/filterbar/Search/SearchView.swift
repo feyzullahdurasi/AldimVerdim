@@ -10,8 +10,7 @@ import SwiftUI
 struct SearchView: View {
     
     @Binding var show: Bool
-    
-    @State private var searchWord = ""
+    @Binding var searchWord: String
     
     var body: some View {
         HStack {
@@ -36,9 +35,11 @@ struct SearchView: View {
                 .foregroundColor(Color(.systemGray2))
                 .shadow(color: .black.opacity(0.5), radius: 2)
         }
+        .padding()
+        
     }
 }
 
 #Preview {
-    SearchView(show: .constant(false))
+    SearchView(show: .constant(true), searchWord: .constant(""))
 }

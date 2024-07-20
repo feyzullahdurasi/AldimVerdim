@@ -34,7 +34,8 @@ class DeveloperPreview {
             address: "arkasokak",
             city: "Balıkesir",
             state: "Karesi",
-            title: "Araç tamamen orjinal Hayalet+Vakum Araç tamamen orjinal",
+            title: "Araç tamamen orjinal Hayalet+Vakum Araç tamamen orjinal", 
+            comment: "Araç tamamen orjinal Hayalet+Vakum Araç tamamen orjinal kilometresi düşüktür nadir koleksiyonluk araba ",
             rating: 4.5,
             features: [.superHost],
             type: .sedan
@@ -63,6 +64,7 @@ class DeveloperPreview {
             city: "Ankara",
             state: "Mamak",
             title: "Ağır hasar kaydı vardır ölücüler aramasın",
+            comment: "Araç tamamen orjinal Hayalet+Vakum Araç tamamen orjinal Ağır hasar kaydı vardır ölücüler aramasın",
             rating: 3.9,
             features: [.superHost],
             type: .sedan
@@ -91,6 +93,7 @@ class DeveloperPreview {
             city: "İstanbul",
             state: "Tuzla",
             title: "Gelen alır o kadar söylüyorum, ayna bozuktur",
+            comment: " Gelen alır o kadar söylüyorum, ayna bozuktur Gelen alır o kadar söylüyorum, ayna bozuktur",
             rating: 3.2,
             features: [.superHost],
             type: .suv
@@ -118,7 +121,8 @@ class DeveloperPreview {
             address: "arkasokak",
             city: "İstanbul",
             state: "Ataşehir",
-            title: "kilometresi düşüktür nadir koleksiyonluk araba",
+            title: "kilometresi düşüktür nadir koleksiyonluk araba", 
+            comment: "Gelen alır o kadar söylüyorum, ayna bozuktur kilometresi düşüktür nadir koleksiyonluk araba",
             rating: 4.8,
             features: [.superHost],
             type: .hachback
@@ -146,7 +150,8 @@ class DeveloperPreview {
             address: "arkasokak",
             city: "Balıkesir",
             state: "Karesi",
-            title: "Araç tamamen orjinal Hayalet+Vakum Araç tamamen orjinal",
+            title: "Araç tamamen orjinal Hayalet+Vakum Araç tamamen orjinal", 
+            comment: "Araç tamamen orjinal Hayalet+Vakum Araç tamamen orjinal Araç tamamen orjinal Hayalet+Vakum Araç tamamen orjinal",
             rating: 4.5,
             features: [.superHost],
             type: .sedan
@@ -174,7 +179,8 @@ class DeveloperPreview {
             address: "arkasokak",
             city: "Ankara",
             state: "Mamak",
-            title: "Ağır hasar kaydı vardır ölücüler aramasın",
+            title: "Ağır hasar kaydı vardır ölücüler aramasın", 
+            comment: "Ağır hasar kaydı vardır ölücüler aramasın Ağır hasar kaydı vardır ölücüler aramasın Ağır hasar kaydı vardır ölücüler aramasın Ağır hasar kaydı vardır ölücüler aramasın",
             rating: 4.1,
             features: [.superHost],
             type: .sedan
@@ -202,7 +208,8 @@ class DeveloperPreview {
             address: "arkasokak",
             city: "İstanbul",
             state: "Tuzla",
-            title: "Gelen alır o kadar söylüyorum, ayna bozuktur",
+            title: "Gelen alır o kadar söylüyorum, ayna bozuktur", 
+            comment: "Gelen alır o kadar söylüyorum, ayna bozuktur. Ağır hasar kaydı vardır ölücüler aramasın. Gelen alır o kadar söylüyorum, ayna bozuktur",
             rating: 3.2,
             features: [.superHost],
             type: .suv
@@ -230,7 +237,8 @@ class DeveloperPreview {
             address: "arkasokak",
             city: "İstanbul",
             state: "Ataşehir",
-            title: "kilometresi düşüktür nadir koleksiyonluk araba",
+            title: "kilometresi düşüktür nadir koleksiyonluk araba", 
+            comment: "kilometresi düşüktür nadir koleksiyonluk araba kilometresi düşüktür nadir koleksiyonluk araba kilometresi düşüktür nadir koleksiyonluk araba",
             rating: 4.2,
             features: [.superHost],
             type: .sedan

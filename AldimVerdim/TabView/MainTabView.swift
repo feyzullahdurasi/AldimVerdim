@@ -10,7 +10,9 @@ import SwiftUI
 struct MainTabView: View {
     //@StateObject var viewModel = ExploreViewModel(service: ExploreService())
     let listing: Listing
+    
     var body: some View {
+        
         TabView {
             ExploreView( listing: listing)
                 .tabItem { Label("Keşfet", systemImage: "magnifyingglass") }
@@ -21,10 +23,12 @@ struct MainTabView: View {
             MainProfileView(listing: listing)
                 .tabItem { Label("Profil", systemImage: "person") }
         }
-        .navigationDestination(for: Listing.self) { listing in
-            ListingDetailView(listing: listing)
+        .background(.white)
+        /*.navigationDestination(for: Listing.self) { listing in
+            ListingDetailView(listing: listing, isDetailView: $isDetailView)
                 .navigationBarBackButtonHidden()
-        }
+        }*/
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 

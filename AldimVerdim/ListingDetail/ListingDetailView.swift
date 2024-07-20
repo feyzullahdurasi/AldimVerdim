@@ -11,8 +11,9 @@ struct ListingDetailView: View {
     
     @Environment(\.dismiss) var dismiss
     @State private var selectedTab: String? = "Detay"
-    let listing: Listing
-    
+    var listing: Listing
+    @State private var selectedImage: String? = nil
+    @State private var isImageFullscreen: Bool = false
     
     var body: some View {
         ScrollView {
@@ -22,7 +23,6 @@ struct ListingDetailView: View {
                 } label: {
                     Image(systemName: "chevron.left")
                         .foregroundColor(.black)
-                        
                 }
                 Spacer()
                 Text(listing.title)
@@ -32,8 +32,8 @@ struct ListingDetailView: View {
                 Button {
                     
                 } label: {
-                    Image(systemName: "star")
-                        
+                    Image(systemName: listing.favorite ? "heart.fill" : "heart")
+                        .foregroundColor(listing.favorite ? .red : .black)
                 }
                 
             }
@@ -44,12 +44,20 @@ struct ListingDetailView: View {
                     Image(image)
                         .resizable()
                         .scaledToFit()
+                        .onTapGesture {
+                            selectedImage = image
+                            isImageFullscreen = true
+                        }
                 }
-                    
-                
             }
             .frame(height: 320)
             .tabViewStyle(.page)
+            .fullScreenCover(isPresented: $isImageFullscreen) {
+                if let selectedImage = selectedImage {
+                    FullscreenImageView(image: selectedImage, isPresented: $isImageFullscreen, listing: listing)
+                }
+            }
+            
             Text("Vasıta > Otomobil > BMW > 5 Serisi > 520d > Premium")
                 .font(.caption)
                 .foregroundColor(.blue)
@@ -63,7 +71,7 @@ struct ListingDetailView: View {
                     HStack {
                         Image(systemName: "star.fill")
                             .foregroundColor(.yellow)
-                        Text("\(listing.rating)")
+                        Text("\(String(format: "%.1f", listing.rating))")
                     }
                     Spacer()
                     HStack {
@@ -71,10 +79,11 @@ struct ListingDetailView: View {
                         Text("\(listing.city),\(listing.state)")
                             .underline()
                     }
-                    .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                    
+                    .foregroundColor(.blue)
+                    .onTapGesture {
+                        openMaps(for: listing)
+                    }
                 }
-                
             }
             .padding()
             
@@ -121,19 +130,16 @@ struct ListingDetailView: View {
                         Details(listing: listing)
                             
                     } else if tab == "Açıklama" {
-                        Text("Açıklama bilgileri burada listelenecek.")
+                        Text("\(listing.comment)")
                             .padding()
                     } else if tab == "Ekspertiz" {
-                        Text("Ekspertiz bilgileri burada listelenecek.")
+                        Text("Ekspertiz bilgileri")
                             .padding()
                     }
-                
-                
-                
-                
             }
-            
         }
+        .toolbar(.hidden, for: .tabBar)
+        
         .overlay(alignment: .bottom) {
             VStack {
                 Divider()
@@ -145,7 +151,7 @@ struct ListingDetailView: View {
                            UIApplication.shared.canOpenURL(phoneCallURL) {
                             UIApplication.shared.open(phoneCallURL, options: [:], completionHandler: nil)
                         } else {
-                            // Telefon numarası geçersiz veya arama yapılamıyor
+                            print("Telefon numarası geçersiz veya arama yapılamıyor")
                         }
                     }
                     .foregroundColor(.white)
@@ -173,9 +179,18 @@ struct ListingDetailView: View {
             }
             .background(.white)
         }
+        
     }
 }
 
 #Preview {
     ListingDetailView( listing: DeveloperPreview.shared.listings[0])
 }
+
+private func openMaps(for listing: Listing) {
+    let address = "\(listing.city), \(listing.state)"
+    let encodedAddress = address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+    let url = URL(string: "http://maps.apple.com/?address=\(encodedAddress)")!
+    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+}
+
