@@ -33,6 +33,7 @@ struct DestinationSearchView: View {
     @State private var selectedOptions: DestinationSearchOptions = .price
     
     var body: some View {
+        
         VStack {
             HStack {
                 Button {
@@ -154,17 +155,17 @@ struct DestinationSearchView: View {
                     Text("Vites")
                         .fontWeight(.semibold)
                     
-                        Toggle(isOn: $isAutomatic) {
-                           Text("Otomatik Vites")
-                        }
-                        .toggleStyle(CheckboxToggleStyle())
-                        .padding()
-
-                        Toggle(isOn: $isManual) {
-                            Text("Manuel Vites")
-                        }
-                        .toggleStyle(CheckboxToggleStyle())
-                        .padding()
+                    Toggle(isOn: $isAutomatic) {
+                        Text("Otomatik Vites")
+                    }
+                    .toggleStyle(CheckboxToggleStyle())
+                    .padding()
+                    
+                    Toggle(isOn: $isManual) {
+                        Text("Manuel Vites")
+                    }
+                    .toggleStyle(CheckboxToggleStyle())
+                    .padding()
                     
                     
                 } else {
@@ -187,7 +188,7 @@ struct DestinationSearchView: View {
                     }
                     .toggleStyle(CheckboxToggleStyle())
                     .padding()
-
+                    
                     Toggle(isOn: $isGasoline) {
                         Text("Benzin")
                     }
@@ -195,11 +196,11 @@ struct DestinationSearchView: View {
                     .padding()
                     
                     Toggle(isOn: $isElectric) {
-                       Text("Elektrik")
+                        Text("Elektrik")
                     }
                     .toggleStyle(CheckboxToggleStyle())
                     .padding()
-
+                    
                     Toggle(isOn: $isHybrit) {
                         Text("Hibrit")
                     }
@@ -230,6 +231,7 @@ struct DestinationSearchView: View {
             .padding()
         }
     }
+    
 }
 
 #Preview {
@@ -278,9 +280,9 @@ struct CheckboxToggleStyle: ToggleStyle {
                 .onTapGesture {
                     configuration.isOn.toggle()
                 }
-                
+            
             configuration.label
-               Spacer()
+            Spacer()
         }
         
     }

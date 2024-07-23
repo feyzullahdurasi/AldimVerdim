@@ -18,20 +18,15 @@ struct ExploreView: View {
     
     var body: some View {
         VStack {
-            if !isDetailView {
+            NavigationStack {
                 FilterBar(
                     showDestinationSearchView: $showDestinationSearchView,
                     showDestinationSortView: $showDestinationSortView,
                     showSearchView: $showSearchView,
                     searchWord: $searchWord
                 )
-                .frame(height: !isDetailView ? 54 : 700)
                 .transition(.move(edge: .top))
-                .animation(.easeInOut, value: !isDetailView)
                 
-            }
-            
-            NavigationStack {
                 ScrollView {
                     LazyVStack {
                         ForEach(viewModel.filteredListings) { listing in
@@ -47,12 +42,6 @@ struct ExploreView: View {
                 .navigationDestination(for: Listing.self) { listing in
                     ListingDetailView(listing: listing)
                         .navigationBarBackButtonHidden()
-                        .onAppear {
-                            isDetailView = true
-                        }
-                        .onDisappear {
-                            isDetailView = false
-                        }
                 }
             }
         }

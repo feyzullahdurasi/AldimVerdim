@@ -14,6 +14,7 @@ class ExploreViewModel: ObservableObject {
     private let service: ExploreService
     @Published var filteredListings: [Listing] = []
     @Published var searchWord = ""
+    @Published var selectedSortOption: SortOption = .random
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -23,9 +24,17 @@ class ExploreViewModel: ObservableObject {
         Task { await fetchListings() }
         
         $searchWord
-            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            //.debounce(for: .milliseconds(100), scheduler: RunLoop.main)
             .sink(receiveValue: { [weak self] newSearchWord in
+                //[weak self] bellek sızıntılarını önlemek için kullanılır
                 self?.applySearchFilter(searchWord: newSearchWord)
+            })
+            .store(in: &cancellables)
+        //Bu, gerekli olmadığında abonelikleri iptal etmeyi sağlar
+        
+        $selectedSortOption
+            .sink(receiveValue: { [weak self] newSortOption in
+                self?.sortListings(by: newSortOption)
             })
             .store(in: &cancellables)
     }
@@ -35,7 +44,6 @@ class ExploreViewModel: ObservableObject {
             
             self.listings = try await service.fetchListings()
             self.filteredListings = listings
-            
             
         } catch {
             print("error: \(error.localizedDescription)")
@@ -69,10 +77,11 @@ class ExploreViewModel: ObservableObject {
         case .kmDescending:
             filteredListings.sort { Int($0.km) > Int($1.km) }
         }
+        print("Listings sorted by \(option)")
     }
     
     private func applySearchFilter(searchWord: String) {
-        if searchWord.isEmpty {
+        if searchWord.isEmpty || searchWord == "" {
             
             filteredListings = listings
         } else {
@@ -80,9 +89,9 @@ class ExploreViewModel: ObservableObject {
                 listing.productName.localizedCaseInsensitiveContains(searchWord)
             }
         }
+        print("Listings filtered by search word '\(searchWord)': \(filteredListings.count)")
     }
 }
-    
 
     enum SortOption {
         case random

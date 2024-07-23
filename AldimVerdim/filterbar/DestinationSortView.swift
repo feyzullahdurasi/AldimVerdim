@@ -13,54 +13,54 @@ struct DestinationSortView: View {
     @ObservedObject var viewModel: ExploreViewModel
     
     var body: some View {
-        ScrollView {
-            VStack {
-                Text("Sıralama")
-                    .font(.title)
-                    .padding()
-                ExtractedView2(title: "Rastgele olarak Sırala", action: { viewModel.sortListings(by: .random) })
-                    .modifier(CollapsibleDestinationViewModifier2())
-                    
-                
-                ExtractedView2(title: "Ucuzdan Pahalıya", action: { viewModel.sortListings(by: .priceAscending) })
-                    .modifier(CollapsibleDestinationViewModifier2())
-                
-                ExtractedView2(title: "Pahalıdan Ucuza", action: { viewModel.sortListings(by: .priceDescending)})
-                    .modifier(CollapsibleDestinationViewModifier2())
-                
-                ExtractedView2(title: "Eskiden Yeniye", action: { viewModel.sortListings(by: .yearAscending)})
-                    .modifier(CollapsibleDestinationViewModifier2())
-                
-                ExtractedView2(title: "Yeniden Eskiye", action: { viewModel.sortListings(by: .yearDescending)})
-                    .modifier(CollapsibleDestinationViewModifier2())
-                
-                ExtractedView2(title: "Km Düşükten Yükseğe", action: { viewModel.sortListings(by: .kmAscending)})
-                    .modifier(CollapsibleDestinationViewModifier2())
-                
-                ExtractedView2(title: "Km Yüksekten Düşüğe", action: { viewModel.sortListings(by: .kmDescending)})
-                    .modifier(CollapsibleDestinationViewModifier2())
-                
-                /*ExtractedView2(title: "İlan Tarihi Eskiden Yeniye")
-                    .modifier(CollapsibleDestinationViewModifier2())
-                
-                ExtractedView2(title: "İlan Tarihi Yeniden Eskiye")
-                    .modifier(CollapsibleDestinationViewModifier2())*/
-                Spacer()
-                
-                Button("Vazgeç") {
-                    withAnimation(.snappy) {show.toggle()}
-                }
-                .frame(width: 150, height: 50)
-                .foregroundColor(.white)
-                .fontWeight(.bold)
-                .background(.blue)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+        
+        VStack {
+            Text("Sıralama")
+                .font(.title)
                 .padding()
-            }
-            .frame(height: 700)
+            ExtractedView2(title: "Rastgele olarak Sırala", action: { viewModel.sortListings(by: .random) })
+                .modifier(CollapsibleDestinationViewModifier2())
             
+            
+            ExtractedView2(title: "Ucuzdan Pahalıya", action: { viewModel.sortListings(by: .priceAscending) })
+                .modifier(CollapsibleDestinationViewModifier2())
+            
+            ExtractedView2(title: "Pahalıdan Ucuza", action: { viewModel.sortListings(by: .priceDescending)})
+                .modifier(CollapsibleDestinationViewModifier2())
+            
+            ExtractedView2(title: "Eskiden Yeniye", action: { viewModel.sortListings(by: .yearAscending)})
+                .modifier(CollapsibleDestinationViewModifier2())
+            
+            ExtractedView2(title: "Yeniden Eskiye", action: { viewModel.sortListings(by: .yearDescending)})
+                .modifier(CollapsibleDestinationViewModifier2())
+            
+            ExtractedView2(title: "Km Düşükten Yükseğe", action: { viewModel.sortListings(by: .kmAscending)})
+                .modifier(CollapsibleDestinationViewModifier2())
+            
+            ExtractedView2(title: "Km Yüksekten Düşüğe", action: { viewModel.sortListings(by: .kmDescending)})
+                .modifier(CollapsibleDestinationViewModifier2())
+            
+            /*ExtractedView2(title: "İlan Tarihi Eskiden Yeniye")
+             .modifier(CollapsibleDestinationViewModifier2())
+             
+             ExtractedView2(title: "İlan Tarihi Yeniden Eskiye")
+             .modifier(CollapsibleDestinationViewModifier2())*/
+            Spacer()
+            
+            Button("Vazgeç") {
+                withAnimation(.snappy) {show.toggle()}
+            }
+            .frame(width: 150, height: 50)
+            .foregroundColor(.white)
+            .fontWeight(.bold)
+            .background(.blue)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .padding()
         }
+        .frame(height: 700)
+        
     }
+    
 }
 
 #Preview {
@@ -77,12 +77,13 @@ struct ExtractedView2: View {
             
             HStack {
                 Text(title)
-                    
+                
                 Spacer()
             }
             .contentShape(Rectangle())
             .onTapGesture {
                 action()
+                print("\(title) clicked")
             }
         }
     }
