@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-    //@StateObject var viewModel = ExploreViewModel(service: ExploreService())
+    
     let listing: Listing
     
     var body: some View {

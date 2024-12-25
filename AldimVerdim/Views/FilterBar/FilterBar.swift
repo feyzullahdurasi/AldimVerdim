@@ -1,10 +1,3 @@
-//
-//  FilterBar.swift
-//  AldimVerdim
-//
-//  Created by Feyzullah Durası on 15.07.2024.
-//
-
 import SwiftUI
 
 struct FilterBar: View {

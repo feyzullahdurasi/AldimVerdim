@@ -1,10 +1,3 @@
-//
-//  LoginView.swift
-//  AldimVerdim
-//
-//  Created by Feyzullah Durası on 18.07.2024.
-//
-
 import SwiftUI
 
 struct LoginView: View {
@@ -44,8 +37,8 @@ struct LoginView: View {
             .background(.pink)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .alert(isPresented: $showAlert) {
-                Alert(title: Text("Giriş Durumu"),
-                      message: Text(alertMessage),
+                Alert(title: Text("Giriş Durumu"), 
+                      message: Text(alertMessage), 
                       dismissButton: .default(Text("Tamam")))
             }
             .fullScreenCover(isPresented: $isLoggedIn) {
@@ -69,20 +62,3 @@ struct LoginView: View {
         }
     }
 } 
-
-#Preview {
-    LoginView()
-}
-
-struct CollapsibleDestinationViewModifier_: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .frame(height: 30)
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .padding()
-            .shadow(radius: 10)
-    }
-}

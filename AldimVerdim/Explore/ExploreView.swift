@@ -22,7 +22,6 @@ struct ExploreView: View {
                 FilterBar(
                     showDestinationSearchView: $showDestinationSearchView,
                     showDestinationSortView: $showDestinationSortView,
-                    showSearchView: $showSearchView,
                     searchWord: $searchWord
                 )
                 .transition(.move(edge: .top))
